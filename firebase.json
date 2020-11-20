@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "lets-do-it-ok",
     "public": "build",
     "ignore": [
       "firebase.json",
