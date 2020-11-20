@@ -11,12 +11,12 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
-  useEffect(() => {
+  useEffect(() => {// similar to component did mount
     //fires when the App.js is loaded
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-      setTodos(snapshot.docs.map(doc => doc.data().todo))
+      setTodos(snapshot.docs.map(doc => ({ id: doc.id, todo: doc.data().todo })))
     })
-  }, []); // similar to component did mount
+  }, []); //get all todos order by timestamp
 
   const addTodo = (e) => {
     //onclick of add to Do button
@@ -44,7 +44,7 @@ function App() {
       </form>
       <ul>
         {todos.map(todo => (
-          <Todo text={todo} />
+          <Todo key={todo.id} text={todo} />
         ))}
       </ul>
     </div>
